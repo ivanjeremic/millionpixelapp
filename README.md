@@ -1,2 +1,0 @@
-# millionpixelapp
-Created with CodeSandbox
