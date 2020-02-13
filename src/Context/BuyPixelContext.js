@@ -36,7 +36,7 @@ export const BuyPixelProvider = ({ children }) => {
   const options = [];
 
   for (var i = 1; i <= 1000; i++) {
-    options.push({ value: i, label: i });
+    options.push({ value: JSON.stringify(i), label: JSON.stringify(i) });
   }
 
   return (

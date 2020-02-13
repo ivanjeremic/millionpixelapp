@@ -1,11 +1,11 @@
 import React from "react";
 import MouseTooltip from "react-sticky-mouse-tooltip";
-import Nav from "./Nav";
 import contentbg from "./bg10.gif";
 import bgblack from "./bgblack.png";
 import "./styles.css";
 import { StateContext } from "./Context/StateContext";
 import { BuyPixelContext } from "./Context/BuyPixelContext";
+import Header from "./Header";
 
 export default function App() {
   const { coordinates } = React.useContext(BuyPixelContext);
@@ -79,7 +79,7 @@ export default function App() {
 
   return (
     <div>
-      <Nav />
+      <Header />
       <div
         style={{ background: `url(${contentbg}) repeat #999999` }}
         className="App"

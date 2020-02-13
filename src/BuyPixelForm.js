@@ -11,6 +11,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import Select from "react-select";
 import { BuyPixelContext } from "./Context/BuyPixelContext";
+import { HooksContext } from "./Context/HooksContext";
 
 const useStyles = makeStyles({
   list: {
@@ -23,10 +24,9 @@ const useStyles = makeStyles({
 
 export default function BuyPixelForm() {
   const { options } = React.useContext(BuyPixelContext);
+  const [state, setState] = React.useState({ right: false });
+  const [col, setCol] = React.useState({});
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    right: false
-  });
 
   const toggleDrawer = (side, open) => event => {
     if (
@@ -40,13 +40,18 @@ export default function BuyPixelForm() {
     setState({ ...state, [side]: open });
   };
 
+  console.log("col", col);
+
   const sideList = side => (
     <div className={classes.list} role="presentation">
       <div style={{ padding: "5px" }}>
         <Select
-          defaultValue={options[0]}
+          defaultValue={col.value}
+          isSearchable={true}
           label="Single select"
           options={options}
+          onChange={setCol}
+          value={col}
         />
       </div>
       <Divider />
@@ -96,7 +101,13 @@ export default function BuyPixelForm() {
 
   return (
     <div>
-      <Button onClick={toggleDrawer("right", true)}>Open Right</Button>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={toggleDrawer("right", true)}
+      >
+        Select Pixels
+      </Button>
       <SwipeableDrawer
         anchor="right"
         open={state.right}
