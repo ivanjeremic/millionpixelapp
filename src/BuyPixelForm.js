@@ -45,16 +45,6 @@ export default function BuyPixelForm() {
 
   console.log("col", col);
 
-  const stylelogix = text => {
-    if (text === "Cancel") {
-      const cancel = { background: "red", color: "white" };
-      return cancel;
-    } else if (text === "Checkout") {
-      const checkout = { background: "green", color: "white" };
-      return checkout;
-    }
-  };
-
   const sideList = side => (
     <>
       <div className={classes.list} role="presentation">
@@ -118,12 +108,7 @@ export default function BuyPixelForm() {
         <Divider style={{ margin: "10px" }} />
         <List>
           {["Checkout", "Cancel"].map((text, index) => (
-            <ListItem
-              style={stylelogix(text)}
-              button
-              key={text}
-              onClick={() => setCol({})}
-            >
+            <ListItem button key={text} onClick={() => setCol({})}>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
