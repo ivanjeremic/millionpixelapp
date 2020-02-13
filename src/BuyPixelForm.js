@@ -106,6 +106,23 @@ export default function BuyPixelForm() {
           />
         </div>
         <Divider style={{ margin: "10px" }} />
+        <div style={{ padding: "1em" }}>
+          <div className="file has-name is-boxed">
+            <label className="file-label">
+              <input className="file-input" type="file" name="resume" />
+              <span className="file-cta">
+                <span className="file-icon">
+                  <i className="fas fa-upload" />
+                </span>
+                <span className="file-label">Upload image…</span>
+              </span>
+              <span className="file-name">
+                Screen Shot 2017-07-29 at 15.54.25.png
+              </span>
+            </label>
+          </div>
+        </div>
+        <Divider style={{ margin: "10px" }} />
         <List>
           {["Checkout", "Cancel"].map((text, index) => (
             <ListItem button key={text} onClick={() => setCol({})}>

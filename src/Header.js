@@ -9,6 +9,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { StateContext } from "./Context/StateContext";
 import BuyPixelForm from "./BuyPixelForm";
+import { Button } from "@material-ui/core";
+import { RedisContext } from "./Context/RedisContext";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,6 +33,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Header() {
   const { toggleTooltipFalse } = React.useContext(StateContext);
+  const { runit } = React.useContext(RedisContext);
   const classes = useStyles();
 
   return (
@@ -55,6 +58,7 @@ export default function Header() {
             </div>
           </Typography>
           <BuyPixelForm />
+          <Button onClick={runit}>Write</Button>
         </Toolbar>
       </AppBar>
     </div>
