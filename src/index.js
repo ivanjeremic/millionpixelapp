@@ -4,18 +4,15 @@ import App from "./App";
 import { HooksProvider } from "./Context/HooksContext";
 import { StateProvider } from "./Context/StateContext";
 import { BuyPixelProvider } from "./Context/BuyPixelContext";
-import { RedisProvider } from "./Context/RedisContext";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <StateProvider>
-    <RedisProvider>
-      <HooksProvider>
-        <BuyPixelProvider>
-          <App />
-        </BuyPixelProvider>
-      </HooksProvider>
-    </RedisProvider>
+    <HooksProvider>
+      <BuyPixelProvider>
+        <App />
+      </BuyPixelProvider>
+    </HooksProvider>
   </StateProvider>,
   rootElement
 );
