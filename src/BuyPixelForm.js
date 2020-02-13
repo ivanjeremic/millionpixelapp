@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Chip from "@material-ui/core/Chip";
 import ViewQuiltIcon from "@material-ui/icons/ViewQuilt";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import { AppBar } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
@@ -13,6 +14,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import Select from "react-select";
 import { BuyPixelContext } from "./Context/BuyPixelContext";
+import BottomNavDrawer from "./BottomNavDrawer";
 
 const useStyles = makeStyles({
   list: {
@@ -43,108 +45,95 @@ export default function BuyPixelForm() {
 
   console.log("col", col);
 
-  const bgs = { background: "red", color: "white" };
+  const stylelogix = text => {
+    if (text === "Cancel") {
+      const cancel = { background: "red", color: "white" };
+      return cancel;
+    } else if (text === "Checkout") {
+      const checkout = { background: "green", color: "white" };
+      return checkout;
+    }
+  };
 
   const sideList = side => (
-    <div className={classes.list} role="presentation">
-      <div style={{ padding: "0.3em" }}>
-        <Chip label="Select Column" icon={<ViewQuiltIcon />} color="primary" />
+    <>
+      <div className={classes.list} role="presentation">
+        <AppBar position="sticky">Total Pixels: {col.value}</AppBar>
+        <Divider style={{ margin: "10px" }} />
+        <div style={{ padding: "0.3em" }}>
+          <Chip
+            label="Select Column"
+            icon={<ViewQuiltIcon />}
+            color="primary"
+          />
+        </div>
+        <div style={{ padding: "0.3em" }}>
+          <Chip label="From" />
+        </div>
+        <div style={{ padding: "0.3em" }}>
+          <Select
+            placeholder="From Column"
+            options={options}
+            onChange={setCol}
+            value={{}.hasOwnProperty.call(col, "value") ? col : null}
+          />
+        </div>
+        <div style={{ padding: "0.3em" }}>
+          <Chip label="To" />
+        </div>
+        <div style={{ padding: "0.3em" }}>
+          <Select
+            placeholder="To Column"
+            options={options}
+            onChange={setCol}
+            value={{}.hasOwnProperty.call(col, "value") ? col : null}
+          />
+        </div>
+        <Divider style={{ margin: "10px" }} />
+        <div style={{ padding: "0.3em" }}>
+          <Chip label="Select Row" icon={<ViewQuiltIcon />} color="primary" />
+        </div>
+        <div style={{ padding: "0.3em" }}>
+          <Chip label="From" />
+        </div>
+        <div style={{ padding: "0.3em" }}>
+          <Select
+            placeholder="From Row"
+            options={options}
+            onChange={setCol}
+            value={{}.hasOwnProperty.call(col, "value") ? col : null}
+          />
+        </div>
+        <div style={{ padding: "0.3em" }}>
+          <Chip label="To" />
+        </div>
+        <div style={{ padding: "0.3em" }}>
+          <Select
+            placeholder="To Row"
+            options={options}
+            onChange={setCol}
+            value={{}.hasOwnProperty.call(col, "value") ? col : null}
+          />
+        </div>
+        <Divider style={{ margin: "10px" }} />
+        <List>
+          {["Checkout", "Cancel"].map((text, index) => (
+            <ListItem
+              style={stylelogix(text)}
+              button
+              key={text}
+              onClick={() => setCol({})}
+            >
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>
       </div>
-      <div style={{ padding: "0.3em" }}>
-        <Chip label="From" />
-      </div>
-      <div style={{ padding: "0.3em" }}>
-        <Select
-          placeholder="From Column"
-          options={options}
-          onChange={setCol}
-          value={{}.hasOwnProperty.call(col, "value") ? col : null}
-        />
-      </div>
-      <div style={{ padding: "0.3em" }}>
-        <Chip label="To" />
-      </div>
-      <div style={{ padding: "0.3em" }}>
-        <Select
-          placeholder="To Column"
-          options={options}
-          onChange={setCol}
-          value={{}.hasOwnProperty.call(col, "value") ? col : null}
-        />
-      </div>
-      <Divider />
-      <div style={{ padding: "0.3em" }}>
-        <Chip label="Select Row" icon={<ViewQuiltIcon />} color="primary" />
-      </div>
-      <div style={{ padding: "0.3em" }}>
-        <Chip label="From" />
-      </div>
-      <div style={{ padding: "0.3em" }}>
-        <Select
-          placeholder="From Row"
-          options={options}
-          onChange={setCol}
-          value={{}.hasOwnProperty.call(col, "value") ? col : null}
-        />
-      </div>
-      <div style={{ padding: "0.3em" }}>
-        <Chip label="To" />
-      </div>
-      <div style={{ padding: "0.3em" }}>
-        <Select
-          placeholder="To Row"
-          options={options}
-          onChange={setCol}
-          value={{}.hasOwnProperty.call(col, "value") ? col : null}
-        />
-      </div>
-      <List>
-        {["All mail", "Trash", "Cancel"].map((text, index) => (
-          <ListItem
-            style={text === "Cancel" ? bgs : null}
-            button
-            key={text}
-            onClick={() => setCol({})}
-          >
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
-
-  const fullList = side => (
-    <div
-      className={classes.fullList}
-      role="presentation"
-      onClick={toggleDrawer(side, false)}
-      onKeyDown={toggleDrawer(side, false)}
-    >
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
+      <BottomNavDrawer />
+    </>
   );
 
   return (
