@@ -3,6 +3,12 @@ import React from "react";
 export const BuyPixelContext = React.createContext();
 
 export const BuyPixelProvider = ({ children }) => {
+  const [colFrom, setColFrom] = React.useState({});
+  const [colTo, setColTo] = React.useState({});
+  const [rowFrom, setRowFrom] = React.useState({});
+  const [rowTo, setRowTo] = React.useState({});
+  const [total, setTotal] = React.useState(0);
+
   const BuyPixelReducer = (state, action) => {
     switch (action.type) {
       case "TOOLTIP_TRUE":
@@ -43,7 +49,17 @@ export const BuyPixelProvider = ({ children }) => {
     <BuyPixelContext.Provider
       value={{
         coordinates: state.coordinates,
-        options
+        options,
+        setColFrom,
+        setColTo,
+        setRowFrom,
+        setRowTo,
+        setTotal,
+        colFrom,
+        colTo,
+        rowFrom,
+        rowTo,
+        total
       }}
     >
       {children}

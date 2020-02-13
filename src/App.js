@@ -27,6 +27,19 @@ export default function App() {
     }
   ]);
 
+  const addPixelHandler = () => {
+    setData([
+      {
+        title: "facebook",
+        gridColumn: "1/1000",
+        gridRow: "1/80",
+        image: `url(${bgblack}) repeat #333333`,
+        link: "https://facebook.com"
+      },
+      ...data
+    ]);
+  };
+
   const MouseToolTipComp = props => {
     const {
       tooltipVisible,

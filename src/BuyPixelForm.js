@@ -26,9 +26,21 @@ const useStyles = makeStyles({
 });
 
 export default function BuyPixelForm() {
-  const { options } = React.useContext(BuyPixelContext);
+  const {
+    options,
+    colFrom,
+    colTo,
+    setColFrom,
+    rowFrom,
+    setRowFrom,
+    setColTo,
+    setRowTo,
+    setTotal,
+    rowTo,
+    total
+  } = React.useContext(BuyPixelContext);
   const [state, setState] = React.useState({ right: false });
-  const [col, setCol] = React.useState({});
+
   const classes = useStyles();
 
   const toggleDrawer = (side, open) => event => {
@@ -43,12 +55,15 @@ export default function BuyPixelForm() {
     setState({ ...state, [side]: open });
   };
 
-  console.log("col", col);
+  console.log("colFrom", colFrom.value);
+  console.log("colTo", colTo.value);
+  console.log("rowFrom", rowFrom.value);
+  console.log("rowTo", rowTo.value);
 
   const sideList = side => (
     <>
       <div className={classes.list} role="presentation">
-        <AppBar position="sticky">Total Pixels: {col.value}</AppBar>
+        <AppBar position="sticky">Total Pixels: {}</AppBar>
         <Divider style={{ margin: "10px" }} />
         <div style={{ padding: "0.3em" }}>
           <Chip
@@ -64,8 +79,8 @@ export default function BuyPixelForm() {
           <Select
             placeholder="From Column"
             options={options}
-            onChange={setCol}
-            value={{}.hasOwnProperty.call(col, "value") ? col : null}
+            onChange={setColFrom}
+            value={{}.hasOwnProperty.call(colFrom, "value") ? colFrom : null}
           />
         </div>
         <div style={{ padding: "0.3em" }}>
@@ -75,8 +90,8 @@ export default function BuyPixelForm() {
           <Select
             placeholder="To Column"
             options={options}
-            onChange={setCol}
-            value={{}.hasOwnProperty.call(col, "value") ? col : null}
+            onChange={setColTo}
+            value={{}.hasOwnProperty.call(colTo, "value") ? colTo : null}
           />
         </div>
         <Divider style={{ margin: "10px" }} />
@@ -90,8 +105,8 @@ export default function BuyPixelForm() {
           <Select
             placeholder="From Row"
             options={options}
-            onChange={setCol}
-            value={{}.hasOwnProperty.call(col, "value") ? col : null}
+            onChange={setRowFrom}
+            value={{}.hasOwnProperty.call(rowFrom, "value") ? rowFrom : null}
           />
         </div>
         <div style={{ padding: "0.3em" }}>
@@ -101,8 +116,8 @@ export default function BuyPixelForm() {
           <Select
             placeholder="To Row"
             options={options}
-            onChange={setCol}
-            value={{}.hasOwnProperty.call(col, "value") ? col : null}
+            onChange={setRowTo}
+            value={{}.hasOwnProperty.call(rowTo, "value") ? rowTo : null}
           />
         </div>
         <Divider style={{ margin: "10px" }} />
@@ -125,7 +140,7 @@ export default function BuyPixelForm() {
         <Divider style={{ margin: "10px" }} />
         <List>
           {["Checkout", "Cancel"].map((text, index) => (
-            <ListItem button key={text} onClick={() => setCol({})}>
+            <ListItem button key={text}>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
