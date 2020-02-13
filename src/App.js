@@ -78,7 +78,7 @@ export default function App() {
   };
 
   return (
-    <div>
+    <div style={{ overflowX: "auto" }}>
       <Header />
       <div
         style={{ background: `url(${contentbg}) repeat #999999` }}
