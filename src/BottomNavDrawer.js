@@ -8,7 +8,7 @@ import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 const useStyles = makeStyles({
   root: {
     width: "100%",
-    position: "sticky",
+    position: "absolute",
     bottom: 0,
     marginBottom: 0
   },
