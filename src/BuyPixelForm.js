@@ -11,7 +11,6 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import Select from "react-select";
 import { BuyPixelContext } from "./Context/BuyPixelContext";
-import { HooksContext } from "./Context/HooksContext";
 
 const useStyles = makeStyles({
   list: {
@@ -46,18 +45,16 @@ export default function BuyPixelForm() {
     <div className={classes.list} role="presentation">
       <div style={{ padding: "5px" }}>
         <Select
-          defaultValue={col.value}
-          isSearchable={true}
-          label="Single select"
+          placeholder="Britney"
           options={options}
           onChange={setCol}
-          value={col}
+          value={{}.hasOwnProperty.call(col, "value") ? col : null}
         />
       </div>
       <Divider />
       <List>
         {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
+          <ListItem button key={text} onClick={() => setCol({})}>
             <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
             </ListItemIcon>
